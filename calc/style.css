@@ -1,0 +1,60 @@
+@import url("https://fonts.cdnfonts.com/css/seven-segment");
+@import url("https://fonts.cdnfonts.com/css/drius");
+
+.digit {
+  border: solid darkred;
+  width: 50px;
+  height: 50px;
+  background-color: #f00;
+  border-radius: 20%;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: #fff;
+  margin: 5px;
+}
+
+.digit:active {
+  background-color: #c00;
+}
+
+.operator {
+  border:solid darkblue;
+  width: 50px;
+  height: 50px;
+  background-color: #00f;
+  border-radius: 20%;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: #fff;
+  margin: 5px;
+}
+
+.operator:active {
+  background-color: #00c;
+}
+
+.row {
+  margin: 10px;
+  text-align: center;
+}
+
+#result {
+  width: 300px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-size: 60px;
+  text-align: right;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  font-family: "Seven Segment", sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Drius', sans-serif;
+}
