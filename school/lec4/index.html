@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alert/Confirmation Example</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        // Get a reference to the button element
+        var button = document.getElementById("myButton");
+
+        // Add a click event listener to the button
+        button.addEventListener("click", function() {
+            // Display a confirmation dialog
+            var result = confirm("Do you want to proceed?");
+
+            // Check the user's choice
+            if (result === true) {
+                alert("You clicked 'Yes'!");
+                // Put your code for 'Yes' action here
+            } else {
+                alert("You clicked 'No' or closed the dialog.");
+                // Put your code for 'No' action here or do nothing
+            }
+        });
+    </script>
+</body>
+</html>

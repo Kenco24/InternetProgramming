@@ -1,0 +1,36 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: red;
+    width: 750px;
+    height: 500px;
+    padding:20px;
+    
+    display:flex;
+    align-items:row;
+}
+
+.box {
+    border-radius: 5%;;
+   padding:10px;
+   margin:20px;
+   background-color: blue;
+   width:150px;
+   height: 200px;
+   box-shadow: 1px 1px 15px 4px rgba(205, 162, 77, 0.5);
+
+}
+.desc{
+    border-radius: 5%;;
+    background-color:skyblue;
+    width:130px;
+    height: 150px;;
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+
+
+}
