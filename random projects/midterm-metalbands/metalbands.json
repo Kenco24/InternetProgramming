@@ -1,0 +1,296 @@
+[
+    {
+        "id": 1,
+        "name": "Led Zeppelin",
+        "formed": 1968,
+        "location": "London, England",
+        "country": "United Kingdom",
+        "members": [
+            "Robert Plant",
+            "Jimmy Page",
+            "John Paul Jones",
+            "John Bonham"
+        ],
+        "albums": [
+            {"name": "Led Zeppelin", "year": 1969},
+            {"name": "Led Zeppelin II", "year": 1969},
+            {"name": "Led Zeppelin III", "year": 1970},
+            {"name": "Led Zeppelin IV", "year": 1971},
+            {"name": "Houses of the Holy", "year": 1973},
+            {"name": "Physical Graffiti", "year": 1975},
+            {"name": "Presence", "year": 1976},
+            {"name": "The Song Remains the Same", "year": 1976},
+            {"name": "In Through the Out Door", "year": 1979},
+            {"name": "Coda", "year": 1982}
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Queen",
+        "formed": 1970,
+        "location": "London, England",
+        "country": "United Kingdom",
+        "members": [
+            "Freddie Mercury",
+            "Brian May",
+            "John Deacon",
+            "Roger Taylor"
+        ],
+        "albums": [
+            {"name": "Queen", "year": 1973},
+            {"name": "Queen II", "year": 1974},
+            {"name": "Sheer Heart Attack", "year": 1974},
+            {"name": "A Night at the Opera", "year": 1975},
+            {"name": "A Day at the Races", "year": 1976},
+            {"name": "News of the World", "year": 1977},
+            {"name": "The Game", "year": 1980},
+            {"name": "Hot Space", "year": 1982},
+            {"name": "The Works", "year": 1984},
+            {"name": "A Kind of Magic", "year": 1986}
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Metallica",
+        "formed": 1981,
+        "location": "Los Angeles, California, USA",
+        "country": "USA",
+        "members": [
+            "James Hetfield",
+            "Lars Ulrich",
+            "Kirk Hammett",
+            "Robert Trujillo"
+        ],
+        "albums": [
+            {"name": "Kill 'Em All", "year": 1983},
+            {"name": "Ride the Lightning", "year": 1984},
+            {"name": "Master of Puppets", "year": 1986},
+            {"name": "...And Justice for All", "year": 1988},
+            {"name": "Metallica (The Black Album)", "year": 1991},
+            {"name": "Load", "year": 1996},
+            {"name": "Reload", "year": 1997},
+            {"name": "St. Anger", "year": 2003},
+            {"name": "Death Magnetic", "year": 2008},
+            {"name": "Hardwired... to Self-Destruct", "year": 2016}
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Disturbed",
+        "formed": 1996,
+        "location": "Chicago, Illinois, USA",
+        "country": "USA",
+        "members": [
+            "David Draiman",
+            "Dan Donegan",
+            "John Moyer",
+            "Mike Wengren"
+        ],
+        "albums": [
+            {"name": "The Sickness", "year": 2000},
+            {"name": "Believe", "year": 2002},
+            {"name": "Ten Thousand Fists", "year": 2005},
+            {"name": "Indestructible", "year": 2008},
+            {"name": "Asylum", "year": 2010},
+            {"name": "Immortalized", "year": 2015},
+            {"name": "Evolution", "year": 2018}
+        ]
+    },
+    {
+        "id": 5,
+        "name": "The Rolling Stones",
+        "formed": 1962,
+        "location": "London, England",
+        "country": "United Kingdom",
+        "members": [
+            "Mick Jagger",
+            "Keith Richards",
+            "Ronnie Wood",
+            "Charlie Watts"
+        ],
+        "albums": [
+            {"name": "The Rolling Stones (England's Newest Hit Makers)", "year": 1964},
+            {"name": "12 X 5", "year": 1964},
+            {"name": "Out of Our Heads", "year": 1965},
+            {"name": "Aftermath", "year": 1966},
+            {"name": "Let It Bleed", "year": 1969},
+            {"name": "Sticky Fingers", "year": 1971},
+            {"name": "Exile on Main St.", "year": 1972},
+            {"name": "Goats Head Soup", "year": 1973},
+            {"name": "Some Girls", "year": 1978},
+            {"name": "Tattoo You", "year": 1981}
+        ]
+    },
+    
+    {
+        "id": 6,
+        "name": "AC/DC",
+        "formed": 1973,
+        "location": "Sydney, Australia",
+        "country": "Australia",
+        "members": [
+            "Angus Young",
+            "Brian Johnson",
+            "Cliff Williams",
+            "Phil Rudd"
+        ],
+        "albums": [
+            {"name": "High Voltage", "year": 1975},
+            {"name": "High Voltage (International)", "year": 1976},
+            {"name": "High Voltage (Australia)", "year": 1976},
+            {"name": "Dirty Deeds Done Dirt Cheap", "year": 1976},
+            {"name": "Let There Be Rock", "year": 1977},
+            {"name": "Highway to Hell", "year": 1979},
+            {"name": "Back in Black", "year": 1980},
+            {"name": "For Those About to Rock We Salute You", "year": 1981},
+            {"name": "Flick of the Switch", "year": 1983},
+            {"name": "Fly on the Wall", "year": 1985}
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Nirvana",
+        "formed": 1987,
+        "location": "Aberdeen, Washington, USA",
+        "country": "USA",
+        "members": [
+            "Kurt Cobain",
+            "Krist Novoselic",
+            "Dave Grohl"
+        ],
+        "albums": [
+            {"name": "Bleach", "year": 1989},
+            {"name": "Nevermind", "year": 1991},
+            {"name": "Incesticide", "year": 1992},
+            {"name": "In Utero", "year": 1993},
+            {"name": "MTV Unplugged in New York", "year": 1994},
+            {"name": "From the Muddy Banks of the Wishkah", "year": 1996}
+        ]
+    },
+    {
+        "id": 8,
+        "name": "The Beatles",
+        "formed": 1960,
+        "location": "Liverpool, England",
+        "country": "United Kingdom",
+        "members": [
+            "John Lennon",
+            "Paul McCartney",
+            "George Harrison",
+            "Ringo Starr"
+        ],
+        "albums": [
+            {"name": "Please Please Me", "year": 1963},
+            {"name": "With the Beatles", "year": 1963},
+            {"name": "A Hard Day's Night", "year": 1964},
+            {"name": "Beatles for Sale", "year": 1964},
+            {"name": "Help!", "year": 1965},
+            {"name": "Rubber Soul", "year": 1965},
+            {"name": "Revolver", "year": 1966},
+            {"name": "Sgt. Pepper's Lonely Hearts Club Band", "year": 1967},
+            {"name": "The White Album", "year": 1968},
+            {"name": "Abbey Road", "year": 1969}
+        ]
+    },{
+        "id": 9,
+        "name": "Pink Floyd",
+        "formed": 1965,
+        "location": "London, England",
+        "country": "United Kingdom",
+        "members": [
+            "Roger Waters",
+            "David Gilmour",
+            "Nick Mason",
+            "Richard Wright"
+        ],
+        "albums": [
+            {"name": "The Piper at the Gates of Dawn", "year": 1967},
+            {"name": "A Saucerful of Secrets", "year": 1968},
+            {"name": "Ummagumma", "year": 1969},
+            {"name": "Meddle", "year": 1971},
+            {"name": "The Dark Side of the Moon", "year": 1973},
+            {"name": "Wish You Were Here", "year": 1975},
+            {"name": "Animals", "year": 1977},
+            {"name": "The Wall", "year": 1979},
+            {"name": "The Final Cut", "year": 1983},
+            {"name": "A Momentary Lapse of Reason", "year": 1987}
+        ]
+    },
+    {
+        "id": 10,
+        "name": "The Doors",
+        "formed": 1965,
+        "location": "Los Angeles, California, USA",
+        "country": "USA",
+        "members": [
+            "Jim Morrison",
+            "Ray Manzarek",
+            "Robby Krieger",
+            "John Densmore"
+        ],
+        "albums": [
+            {"name": "The Doors", "year": 1967},
+            {"name": "Strange Days", "year": 1967},
+            {"name": "Waiting for the Sun", "year": 1968},
+            {"name": "The Soft Parade", "year": 1969},
+            {"name": "Morrison Hotel", "year": 1970},
+            {"name": "L.A. Woman", "year": 1971}
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Radiohead",
+        "formed": 1985,
+        "location": "Abingdon, Oxfordshire, England",
+        "country": "United Kingdom",
+        "members": [
+            "Thom Yorke",
+            "Jonny Greenwood",
+            "Colin Greenwood",
+            "Ed O'Brien",
+            "Philip Selway"
+        ],
+        "albums": [
+            {"name": "Pablo Honey", "year": 1993},
+            {"name": "The Bends", "year": 1995},
+            {"name": "OK Computer", "year": 1997},
+            {"name": "Kid A", "year": 2000},
+            {"name": "Amnesiac", "year": 2001},
+            {"name": "Hail to the Thief", "year": 2003},
+            {"name": "In Rainbows", "year": 2007},
+            {"name": "The King of Limbs", "year": 2011},
+            {"name": "A Moon Shaped Pool", "year": 2016}
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Elita 5",
+        "formed": 1991,
+        "location": "Tirana, Albania",
+        "country": "Albania",
+        "members": [
+            "Dritan Shtylla",
+            "Agron Shtylla",
+            "Valter Bujari",
+            "Ndue Shtjefni"
+        ],
+        "albums": [
+            {"name": "Elita 5", "year": 1995},
+            {"name": "Gjurmët e Shën Anës", "year": 1996},
+            {"name": "Syte e saj", "year": 1998},
+            {"name": "Gjenerata e Re", "year": 2000},
+            {"name": "Ti je fiksimi im", "year": 2002},
+            {"name": "Balada e Dreqit", "year": 2004},
+            {"name": "Vjeshte ne Tirane", "year": 2008},
+            {"name": "Retro 1991-2011", "year": 2011},
+            {"name": "Super 8", "year": 2015},
+            {"name": "Nje Rreze", "year": 2019}
+        ]
+    }
+    
+]
+
+
+
+
+

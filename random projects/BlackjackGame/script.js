@@ -116,15 +116,50 @@ const standFunc =async () =>
 
     const playerHand=document.getElementById("dealerHand");
     const playerValue=document.getElementById("dealerValue");
-
+    console.log(data);
     const cardCode = sliceCardValue(data.cards[0].code)
     dealerCards.push(sliceCardValue(cardCode))
+    dealerScore=getSum(dealerCards);
 
     const img = document.createElement("img");
     img.src=data.cards[0].image;
     dealerHand.appendChild(img);
     dealerValue.innerHTML=`Value : ${getSum(dealerCards)}`;
-    dealerScore=getSum(playerCards);
+    dealerScore=getSum(dealerCards);
+    console.log(dealerScore);
+
+    console.log(dealerCards);
+    console.log("Dealer"+getSum(dealerCards));
+    console.log("Player"+getSum(playerCards));
+    console.log("Player score "+ playerScore)
+    console.log("Dealer score "+ dealerScore)
+    if(dealerScore>21)
+    {
+      resultHead.innerText = "PLAYER WINS!";
+      alert("Refresh the website to restart! GG");
+      
+    }
+    if (dealerScore===21)
+    {   
+        if(dealerCards==playerScore)
+        {
+          resultHead.innerText = "BOTH DEALER AND PLAYER GOT BLACKJACK!";
+          alert("Refresh the website to restart! GG");
+        }
+        else
+        {
+          resultHead.innerText = "DEALER BLACKJACK WINS!";
+          alert("Refresh the website to restart! GG");
+        }
+    }
+    if (dealerScore>playerScore && dealerScore<21)
+    {
+      resultHead.innerText = "DEALER WINS!";
+      alert("Refresh the website to restart! GG");
+    }
+  
+   
+
 }
 
 
