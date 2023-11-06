@@ -24,6 +24,9 @@ type metalBandSorter = (first: metalBand,second: metalBand) => number;
 
 let metalbands : metalBand[] = [];
 
+
+
+
 async function siteCode() {
     const data = await loadData();
     metalbands=data;
@@ -46,12 +49,47 @@ async function siteCode() {
 
     const applyFilterButton = document.getElementById("apply-filter")!;
     applyFilterButton.addEventListener("click", applyFilter)
+
+    const nameFilterInput = document.getElementById("name-filter") as HTMLInputElement;
+nameFilterInput.addEventListener("input", applyNameFilter);
+
+const locationFilterInput = document.getElementById("location-filter") as HTMLInputElement;
+locationFilterInput.addEventListener("input", applyLocationFilter);
+
+
+
 }
 
 const nameSorter: metalBandSorter = (first, second) => first.name.localeCompare(second.name);
 const idSorter: metalBandSorter = (first, second) => first.id - second.id;
 const formedSorter : metalBandSorter = (first,second) =>first.formed-second.formed;
 const albumsSorter : metalBandSorter = (first,second) =>second.albums.length- first.albums.length;
+
+const applyNameFilter = () => {
+    const nameFilterInput = document.getElementById("name-filter") as HTMLInputElement;
+    const nameFilter = nameFilterInput.value.trim().toLowerCase();
+
+    let filteredBands = metalbands;
+
+    if (nameFilter !== "") {
+        filteredBands = metalbands.filter(band => band.name.toLowerCase().includes(nameFilter));
+    }
+
+    displayBands(filteredBands);
+};
+
+const applyLocationFilter = () => {
+    const locationFilterInput = document.getElementById("location-filter") as HTMLInputElement;
+    const locationFilter = locationFilterInput.value.trim().toLowerCase();
+
+    let filteredBands = metalbands;
+
+    if (locationFilter !== "") {
+        filteredBands = metalbands.filter(band => band.location.toLowerCase().includes(locationFilter));
+    }
+
+    displayBands(filteredBands);
+};
 
 
 
@@ -107,15 +145,13 @@ const sortByAlbum = () =>{
 const loadData = async () =>
 {
 
-    const datauri = "./metalbands.json";
+    const datauri = "https://raw.githubusercontent.com/Kenco24/InternetProgramming/main/random%20projects/midterm-metalbands/metalbands.json";
     const response = await fetch(datauri);
     if (!response.ok) {
         throw new Error("The data is not there");
     }
 
     const data = await response.json();
-
-    console.log(data[0].albums[8].year);
     return data;
 
 }
