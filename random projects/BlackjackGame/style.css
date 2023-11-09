@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #3a3a3a;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.dealerDiv, .playerDiv {
+    background-color: #2a2a2a;
+    border: 2px solid #666;
+    border-radius: 10px;
+    padding: 20px;
+    width: 750px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.hand-container {
+    display: flex;
+    flex-wrap: nowrap;
+    
+    justify-content: flex-start;
+    max-width: 100%; /* Adjust the maximum width if needed */
+}
+
+.hand-container img {
+    max-width: 150px; /* Increase the card width */
+    margin-right: 10px; /* Add spacing between cards */
+}
+/* Style for the result header container */
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+h1 {
+    font-size: 24px;
+}
+
+#dealerValue, #playerValue {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+#resultHeader {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#hitBtn:hover, #standBtn:hover {
+    background-color: #0056b3;
+}
+
+#restartBtn {
+    background-color: #28a745;
+}
+
+#restartBtn:hover {
+    background-color: #1f8c37;
+}

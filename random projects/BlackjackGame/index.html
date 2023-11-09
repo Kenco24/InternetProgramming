@@ -9,35 +9,49 @@
 <body>
     
 
-    <script src="script.js"></script>
+    <div class="wrapper">
+    
+
     <div class="dealerDiv">
             <h1>Dealer</h1>
 
-            <div id="dealerHand">
+            <div id="dealerHand" class="hand-container">
 
             </div>
             <p id="dealerValue">Value</p>
     </div>
 
     <br>
-        <h1 id="resultHeader"></h1>
-        <button id="restartBtn" style="display:none">Restart!</button>
+        <div class="result-container">
+            <h1 id="resultHeader"></h1>
+            <button id="restartBtn" style="display:none">Restart!</button>
+        </div>
+       
         
     <br>
+
     <div class="playerDiv">
 
             <h1>Player</h1>
-            <div id="playerHand" >
+            <div id="playerHand" class="hand-container">
                 
             </div>
             <p id="playerValue">Value</p>
+
+            <div class="button-container">
+                <button id="hitBtn" >Hit</button>
+                <button id="standBtn">Stand</button>
+            </div>
     </div>
+
     <div>
 
-    
-    <button id="hitBtn" >Hit</button>
-    <button id="standBtn">Stand</button>
+ 
+  
 </div>
 
+
+</div>
+<script src="script.js"></script>
 </body>
 </html>

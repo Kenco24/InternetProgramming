@@ -1,12 +1,27 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", SiteCode);
 
+
+
+async function SiteCode()
+{
+  const hitbutton=document.getElementById("hitBtn")
+  hitbutton.addEventListener("click", hitFunc);
+
+  const standbutton=document.getElementById("standBtn")
+  standbutton.addEventListener("click", standFunc); 
+
+  const restartbutton=document.getElementById("restartBtn")
+  restartbutton.addEventListener('click',restartFunc);
+
+  firstDraw();
+}
 var playerScore=0;
 var dealerScore=0;
 var deckid="";
 
 const  fetchDeckId = async() => {
   try {
-    const response = await fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1', { method: "GET" });
+    const response = await fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2', { method: "GET" });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -17,6 +32,18 @@ const  fetchDeckId = async() => {
     console.error('Error fetching data:', error);
   }
 };
+
+
+const fetchCard = async (number) =>{
+
+     
+  const url = `https://www.deckofcardsapi.com/api/deck/${deckid}/draw/?count=${number}`;
+  const response = await fetch(url,{method:"GET"});
+  const data = await response.json();
+
+  return data;
+
+  }
 
 
 
@@ -58,21 +85,14 @@ const getSum = (cards) => {
   }
 };
 
-const restOfGame = () => {
-  document.getElementById("hitBtn").addEventListener("click", hitFunc);
-  document.getElementById("standBtn").addEventListener("click", standFunc); 
-  document.getElementById("restartBtn").addEventListener('click',restartFunc);
- 
-}
+
 
 
 
 const hitFunc = async () =>
 { 
     
-    const url = `https://www.deckofcardsapi.com/api/deck/${deckid}/draw/?count=1`;
-    const response = await fetch(url,{method:"GET"});
-    const data = await response.json();
+    const data = await fetchCard(1);
 
     const playerHand=document.getElementById("playerHand");
     const playerValue=document.getElementById("playerValue");
@@ -134,12 +154,12 @@ const showResult = (text) =>{
 
 const restartFunc = () =>
 {
+  i=0;
   document.getElementById("playerHand").innerHTML="";
   document.getElementById("dealerHand").innerHTML="";
   dealerCards=[]
   playerCards=[]
-  dealerValue=0;
-  playerValue=0;
+  tempimg=[];
   
   document.getElementById("resultHeader").innerHTML="";
   document.getElementById("restartBtn").style.display="none";
@@ -170,11 +190,18 @@ const showhiddenCard= ()=>
 
 let tempimg = [];
 let gameover=false;
+let i=0;
 const standFunc =async () =>
-{
+{   
+ 
+    const data = await fetchCard(1);
 
-    showhiddenCard();
 
+    if(i===0)
+    {
+      showhiddenCard();
+      i++;
+    }
     
 
   
@@ -189,22 +216,25 @@ const standFunc =async () =>
 
     if(dealerScore<=16)
     {
-        const url = `https://www.deckofcardsapi.com/api/deck/${deckid}/draw/?count=1`;
-        const response = await fetch(url,{method:"GET"});
-        const data = await response.json();
+        
+        
    
-      console.log(data);
+        console.log(data);
           
         const cardCode = sliceCardValue(data.cards[0].code)
         dealerCards.push(sliceCardValue(cardCode))
         dealerScore=getSum(dealerCards);
+        console.log(data.cards.image);
     
         const img = document.createElement("img");
         img.src=data.cards[0].image;
+        console.log(dealerHand);
         dealerHand.appendChild(img);
-        dealerValue.innerHTML=`Value : ${getSum(dealerCards)}`;
         dealerScore=getSum(dealerCards);
         console.log(dealerScore);
+        dealerValue = document.getElementById("dealerValue"); // Update dealerValue here
+        dealerValue.innerHTML = dealerScore;
+    
     
         
         standFunc();
@@ -266,8 +296,10 @@ const standFunc =async () =>
         
       }
   
-    
-   
+    dealerValue.innerHTML=`Value : ${getSum(dealerCards)}`;
+    console.log(dealerCards)
+    console.log("Dealer value " +getSum(dealerCards));
+
 
 }
 
@@ -319,8 +351,7 @@ const firstDraw = async () =>
         dealerHand.appendChild(img);
       }
      
-    
-      
+  
     }
   }
  
@@ -333,15 +364,12 @@ const firstDraw = async () =>
   playerValue.innerHTML=`Value : ${getSum(playerCards)}`;
   playerScore=getSum(playerCards);
 
-  restOfGame();
+
 
 }
 
-firstDraw();
 
 
-
-});
 
 
 
