@@ -79,7 +79,7 @@ const sliceCardValue=(val) =>{
 const getSum = (cards) => {
   if (Array.isArray(cards)) {
     let totalValue = cards.map((card) => cardValueMap[card]).reduce((sum, value) => sum + value, 0);
-    let numAces = cards.filter((card) => card === 'Ace').length;
+    let numAces = cards.filter((card) => card === 'A').length;
 
     // Check if there are Aces in the hand and the total value is less than or equal to 11
     while (numAces > 0 && totalValue <= 11) {
