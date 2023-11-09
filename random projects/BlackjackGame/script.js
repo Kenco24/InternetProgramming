@@ -49,6 +49,7 @@ const fetchCard = async (number) =>{
 
 
 const cardValueMap = {
+  'A' : 1,
   '2' : 2,
   '3' : 3,
   '4' : 4,
@@ -61,7 +62,7 @@ const cardValueMap = {
   'J' : 10,
   'Q' : 10,
   'K': 10,
-  'A' : 10
+  
 }
 
 let dealerCards=[]
@@ -77,13 +78,20 @@ const sliceCardValue=(val) =>{
 
 const getSum = (cards) => {
   if (Array.isArray(cards)) {
-    
-    return cards.map((card) => cardValueMap[card]).reduce((sum, value) => sum + value, 0);
+    let totalValue = cards.map((card) => cardValueMap[card]).reduce((sum, value) => sum + value, 0);
+    let numAces = cards.filter((card) => card === 'Ace').length;
+
+    // Check if there are Aces in the hand and the total value is less than or equal to 11
+    while (numAces > 0 && totalValue <= 11) {
+      totalValue += 10; // Add 10 to the total value for the Ace (making it count as 11)
+      numAces--; // Reduce the count of Aces
+    }
+
+    return totalValue;
   } else {
-   
     return cardValueMap[cards] || 0;
   }
-};
+}
 
 
 
