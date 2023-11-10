@@ -107,12 +107,12 @@ const hitFunc = async () => {
   const img = document.createElement("img");
  
     playerHand.appendChild(img);
-    playerValue.innerHTML = `Value : ${getSum(playerCards)}`;
-    playerScore = getSum(playerCards);
+   
     img.src = data.cards[0].image;
     animateCard(img, 500).then(async () => {
       await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 500 milliseconds (adjust as needed)
-    
+      playerValue.innerHTML = `Value : ${getSum(playerCards)}`;
+      playerScore = getSum(playerCards);
       if (playerScore > 21) {
         showhiddenCard();
         showResult("PLAYER BUST, DEALER WINS!");
@@ -181,7 +181,8 @@ const showhiddenCard= async ()=>
     dealerHand.appendChild(img2);
     await animateCard(img2);
     
-    document.getElementById("dealerValue").innerHTML=`Value : ${getSum(dealerCards)}`;;
+    setTimeout(async () => {    document.getElementById("dealerValue").innerHTML=`Value : ${getSum(dealerCards)}`;},1000);
+
 }
 
 let tempimg = [];
