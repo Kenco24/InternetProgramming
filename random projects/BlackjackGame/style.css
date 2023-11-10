@@ -1,10 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #3a3a3a;
+    background-color: #3C8333;
     color: white;
     text-align: center;
     margin: 0;
-    padding: 0;
+    padding: 50px;
+    font-family: 'Poppins';font-size: 22px;
 }
 
 .wrapper {
@@ -15,17 +16,22 @@ body {
     flex-direction: column;
 }
 
+.card-animation {
+    transform: scale(0); 
+    transition: transform 0.5s ease-in-out; 
+}
+
 .dealerDiv, .playerDiv {
-    background-color: #2a2a2a;
-    border: 2px solid #666;
+    background-color: #2E6328;
+    border: 2px solid white;
     border-radius: 10px;
     padding: 20px;
-    width: 750px;
+    width: 1000px;
     margin: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
+    align-items: center;
+    justify-content: center; 
 }
 .button-container {
     display: flex;
@@ -33,20 +39,23 @@ body {
     align-items: center;
     margin-top: 10px;
 }
-
+.value-container{
+    border:solid 3px white;
+    border-radius: 10px;
+    padding:10px;
+}
 .hand-container {
     display: flex;
     flex-wrap: nowrap;
     
     justify-content: flex-start;
-    max-width: 100%; /* Adjust the maximum width if needed */
+    max-width: 100%; 
 }
 
 .hand-container img {
-    max-width: 150px; /* Increase the card width */
-    margin-right: 10px; /* Add spacing between cards */
+    max-width: 150px;
+    margin-right: 10px; 
 }
-/* Style for the result header container */
 .result-container {
     display: flex;
     flex-direction: column;
@@ -85,9 +94,14 @@ button {
 }
 
 #restartBtn {
-    background-color: #28a745;
+    background-color: red;
 }
 
 #restartBtn:hover {
-    background-color: #1f8c37;
+    background-color: black;
+}
+
+h1 {
+    text-decoration: underline;
+
 }

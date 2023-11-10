@@ -79,12 +79,11 @@ const sliceCardValue=(val) =>{
 const getSum = (cards) => {
   if (Array.isArray(cards)) {
     let totalValue = cards.map((card) => cardValueMap[card]).reduce((sum, value) => sum + value, 0);
-    let numAces = cards.filter((card) => card === 'Ace').length;
+    let numAces = cards.filter((card) => card === 'A').length;
 
-    // Check if there are Aces in the hand and the total value is less than or equal to 11
     while (numAces > 0 && totalValue <= 11) {
-      totalValue += 10; // Add 10 to the total value for the Ace (making it count as 11)
-      numAces--; // Reduce the count of Aces
+      totalValue += 10; 
+      numAces--; 
     }
 
     return totalValue;
@@ -97,57 +96,45 @@ const getSum = (cards) => {
 
 
 
-const hitFunc = async () =>
-{ 
-    
-    const data = await fetchCard(1);
-
-    const playerHand=document.getElementById("playerHand");
-    const playerValue=document.getElementById("playerValue");
-
-    console.log(data);
-    const cardCode = sliceCardValue(data.cards[0].code)
-    playerCards.push(sliceCardValue(cardCode));
-
+const hitFunc = async () => {
+  const data = await fetchCard(1);
+  const playerHand = document.getElementById("playerHand");
+  const playerValue = document.getElementById("playerValue");
   
-    const img = document.createElement("img");
-    img.src=data.cards[0].image;
+  const cardCode = sliceCardValue(data.cards[0].code);
+  playerCards.push(sliceCardValue(cardCode));
+
+  const img = document.createElement("img");
+ 
     playerHand.appendChild(img);
-    playerValue.innerHTML=`Value : ${getSum(playerCards)}`;
-    playerScore=getSum(playerCards);
-   
-
-    console.log(getSum(playerCards));
-    console.log(playerScore);
-
-    if (playerScore > 21) {
-      
+    playerValue.innerHTML = `Value : ${getSum(playerCards)}`;
+    playerScore = getSum(playerCards);
+    img.src = data.cards[0].image;
+    animateCard(img, 500).then(async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 500 milliseconds (adjust as needed)
+    
+      if (playerScore > 21) {
         showhiddenCard();
         showResult("PLAYER BUST, DEALER WINS!");
-        gameover=true;
-      
-    
-
-      
-  } else if (playerScore === 21) {
-       
-       standFunc();
-        
-       
-    
-  }
-  
-  if(gameover)
-      {
-        const restartbtn=document.getElementById("restartBtn");
-        restartbtn.style.display="block";
-
-
-        
+        gameover = true;
+      } else if (playerScore === 21) {
+        standFunc();
       }
     
+      if (gameover) {
+        const restartbtn = document.getElementById("restartBtn");
+        restartbtn.style.display = "block";
+      }
+    });
     
-}
+
+   
+
+
+  
+  console.log(getSum(playerCards));
+  console.log(playerScore);
+};
 
 
 
@@ -178,7 +165,7 @@ const restartFunc = () =>
   
 }
 
-const showhiddenCard= ()=>
+const showhiddenCard= async ()=>
 {
     const dealerHand=document.getElementById("dealerHand");
     const dealerValue=document.getElementById("dealerValue");
@@ -192,6 +179,7 @@ const showhiddenCard= ()=>
     img2.src=tempimg[1];
     dealerHand.appendChild(img1);
     dealerHand.appendChild(img2);
+    await animateCard(img2);
     
     document.getElementById("dealerValue").innerHTML=`Value : ${getSum(dealerCards)}`;;
 }
@@ -199,15 +187,25 @@ const showhiddenCard= ()=>
 let tempimg = [];
 let gameover=false;
 let i=0;
+let animateTime=500;
+
+
+
+async function animateCard(cardElement,time) {
+  cardElement.classList.add("card-animation");
+  setTimeout(() => {
+      cardElement.style.transform = "scale(1)"; // Apply animation after a brief delay
+  }, time); // Adjust the delay as needed
+}
+
 const standFunc =async () =>
 {   
  
-    const data = await fetchCard(1);
 
 
     if(i===0)
     {
-      showhiddenCard();
+      showhiddenCard(500);
       i++;
     }
     
@@ -222,32 +220,34 @@ const standFunc =async () =>
     console.log("Dealer score "+ dealerScore)
 
 
-    if(dealerScore<=16)
-    {
-        
-        
-   
-        console.log(data);
-          
-        const cardCode = sliceCardValue(data.cards[0].code)
-        dealerCards.push(sliceCardValue(cardCode))
-        dealerScore=getSum(dealerCards);
-        console.log(data.cards.image);
+    if (dealerScore <= 16) {
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 500 milliseconds (adjust as needed)
+      const data = await fetchCard(1);
+
+      console.log(data);
+
+      const cardCode = sliceCardValue(data.cards[0].code);
+      dealerCards.push(sliceCardValue(cardCode));
+      dealerScore = getSum(dealerCards);
+      console.log(data.cards.image);
+
+      const img = document.createElement("img");
+
+      img.src = data.cards[0].image;
+      dealerHand.appendChild(img);
     
-        const img = document.createElement("img");
-        img.src=data.cards[0].image;
-        console.log(dealerHand);
-        dealerHand.appendChild(img);
-        dealerScore=getSum(dealerCards);
-        console.log(dealerScore);
-        dealerValue = document.getElementById("dealerValue"); // Update dealerValue here
-        dealerValue.innerHTML = dealerScore;
+      console.log(dealerScore);
+      animateCard(img,animateTime);
+      dealerValue = document.getElementById("dealerValue");
     
-    
-        
-        standFunc();
-    }
-    if(dealerScore>21)
+      standFunc();
+
+ 
+      };
+
+      setTimeout(async () => {
+
+          if(dealerScore>21)
     {
       showResult("DEALER BUST,PLAYER WINS");
       gameover=true;
@@ -281,7 +281,7 @@ const standFunc =async () =>
       showResult("TIE!");
       gameover=true;
     }
-    if (playerScore>dealerScore)
+    if (playerScore>dealerScore && dealerScore>16)
     {
       if (playerScore===21)
       {
@@ -303,14 +303,21 @@ const standFunc =async () =>
 
         
       }
-  
-    dealerValue.innerHTML=`Value : ${getSum(dealerCards)}`;
+    
+      dealerValue.innerHTML=`Value : ${getSum(dealerCards)}`;
+    
     console.log(dealerCards)
     console.log("Dealer value " +getSum(dealerCards));
+    
+
+      },1000)
+
+    
+      
+
 
 
 }
-
 
 
 const firstDraw = async () =>
@@ -322,12 +329,16 @@ const firstDraw = async () =>
   }
 
   
+
+
   gameover=false;
   const dealerHand=document.getElementById("dealerHand");
   const playerHand=document.getElementById("playerHand");
   const dealerValue=document.getElementById("dealerValue");
   const playerValue=document.getElementById("playerValue");
 
+  playerValue.innerHTML=`Value :`;
+  dealerValue.innerHTML=`Value :`;
  
 
   const data = await response.json();
@@ -338,25 +349,53 @@ const firstDraw = async () =>
     const cardCode = sliceCardValue(card.code)
     if (i % 2 === 0) {
       
-
-      playerCards.push(cardCode);
-      img.src = card.image;
-      playerHand.appendChild(img);
-    } else {
+      if(i===2){
+        playerCards.push(cardCode);
+        img.src = card.image;
+        playerHand.appendChild(img);
+        await animateCard(img,1500);
+        
+        setTimeout(() => {
+          playerValue.innerHTML=`Value : ${getSum(playerCards)}`;
+        }, 2000);
+      }
+      else{
+        playerCards.push(cardCode);
+        img.src = card.image;
+        playerHand.appendChild(img);
+        await animateCard(img,500);
+        
+        setTimeout(() => {
+          playerValue.innerHTML=`Value : ${getSum(playerCards[0])}`;
+        }, 2000);
+      }
+      }
+     
+      else {
 
       if(i===3)
       {
         
         dealerCards.push(cardCode);
         tempimg.push(card.image);
-        img.src = "https://andrewthamcc.github.io/blackjack2.0/assets/facedown.png"
+        img.src = "https://andrewthamcc.github.io/blackjack2.0/assets/facedown.png";
         dealerHand.appendChild(img);
+        await animateCard(img,2000)
+
+        setTimeout(() => {
+          dealerValue.innerHTML=`Value : ${getSum(dealerCards[0])}`;
+        }, 2000);
+     
       }
       else{
         dealerCards.push(cardCode);
         img.src = card.image;
         tempimg.push(card.image);
         dealerHand.appendChild(img);
+        await animateCard(img,1000)
+        setTimeout(() => {
+          dealerValue.innerHTML=`Value : ${getSum(dealerCards[0])}`;
+        }, 1000);
       }
      
   
@@ -364,13 +403,17 @@ const firstDraw = async () =>
   }
  
   console.log(getSum(dealerCards));
-  dealerValue.innerHTML=`Value : ${getSum(dealerCards[0])}`;
+
   dealerScore=getSum(dealerCards);
 
   console.log(playerCards);
   console.log(getSum(playerCards));
-  playerValue.innerHTML=`Value : ${getSum(playerCards)}`;
   playerScore=getSum(playerCards);
+
+  if (playerScore===21)
+  {
+    standFunc();
+  }
 
 
 
