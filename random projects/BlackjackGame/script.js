@@ -22,6 +22,12 @@ async function SiteCode()
 var playerScore=0;
 var dealerScore=0;
 var deckid="";
+var playerWinBool=false;
+var dealerWinBool=false;
+var tiesBool=false;
+var playerWins=0
+var dealerWins=0
+var ties=0
 
 
 // This fetches a 2 decks equaling about 100 cards and sets the deckid
@@ -137,21 +143,32 @@ const hitFunc = async () => {
       await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 500 milliseconds (adjust as needed)
       playerValue.innerHTML = `Value : ${getSum(playerCards)}`;  // sets HTML Value to the sum of playercards
       playerScore = getSum(playerCards);  //adds it to the playerscore to calc who wins etc.
+      if (!gameover)
+      {
+
+      
       if (playerScore > 21) {    
         showhiddenCard();   //If player busts the hiddencard for dealer is shown
         showResult("PLAYER BUST, DEALER WINS!");  
+        dealerWinBool=true;
         gameover = true; 
-      } else if (playerScore === 21) {
+      } 
+      else if (playerScore === 21) {
         showResult('');
         standFunc();   // if player gets blackjack we automatically stand and see what dealer has
       }
     
       if (gameover) {
-
-        const restartbtn = document.getElementById("restartBtn");
-        restartbtn.style.display = "block";
+        setTimeout(() => {
+          const restartbtn = document.getElementById("restartBtn");
+          restartbtn.style.display = "block";
+          hitbutton.style.display = "none";
+          standbutton.style.display = "none";
+        }, 1000);
+        
         // when the round ends we display a restart button
       }
+    }
     
     });
     
@@ -178,25 +195,47 @@ const showResult = (text) =>{
   const resultHead=document.getElementById("resultHeader");
   const hitButton=document.getElementById("hitBtn");
   const standButton=document.getElementById("standBtn");
-
-  const playerValue=document.getElementById("playerValue");
-  playerValue.innerHTML = `Value : ${getSum(playerCards)}`
-  const dealerValue=document.getElementById("dealerValue");
-  dealerValue.innerHTML = `Value : ${getSum(dealerCards)}`
   hitButton.style.display = "none";
   standButton.style.display = "none";
-  resultHead.innerText = text;
+    setTimeout(() => {
+  
+ 
+  
+    const playerValue=document.getElementById("playerValue");
+    playerValue.innerHTML = `Value : ${getSum(playerCards)}`
+    const dealerValue=document.getElementById("dealerValue");
+    dealerValue.innerHTML = `Value : ${getSum(dealerCards)}`
+ 
+    resultHead.innerText = text;
+  }, 500);
+
 }
 
 //When the gamer is over a restart button is displayed which when clicked calls this fucntion. What this function does is reset everything like it was at the start. Then calls first draw
 const restartFunc = () =>
-{
+{ 
+  if (playerWinBool)
+  {
+      playerWins++;
+  }
+  else if (dealerWinBool)
+  {
+    dealerWins++;
+  }
+  else if(tiesBool)
+  {
+    ties++;
+  }
   i=0;
   document.getElementById("playerHand").innerHTML="";
   document.getElementById("dealerHand").innerHTML="";
   dealerCards=[]
   playerCards=[]
   tempimg=[];
+  playerWinBool=false;
+  dealerWinBool=false;
+  tiesBool=false;
+  gameover=false;
   
   document.getElementById("resultHeader").innerHTML="";
   document.getElementById("restartBtn").style.display="none";
@@ -214,7 +253,7 @@ const showhiddenCard= async ()=>
     const dealerHand=document.getElementById("dealerHand");
     const dealerValue=document.getElementById("dealerValue");
 
-    console.log("Stand button clicked!")  //test purpose
+    
     console.log(tempimg); //test
     dealerHand.innerHTML="";   //clears the previous 2 cards 
     const img1=document.createElement("img"); //creating img element
@@ -269,7 +308,8 @@ const standFunc =async () =>
     console.log("Player score "+ playerScore)
     console.log("Dealer score "+ dealerScore)
 
-
+    if (!gameover)
+    {
     if (dealerScore <= 16) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       const data = await fetchCard(1);
@@ -292,6 +332,8 @@ const standFunc =async () =>
       dealerValue = document.getElementById("dealerValue");
       }, 1500);
       
+
+      console.log("Players score in standFUnc()" + playerScore )
       
       standFunc();
 
@@ -303,16 +345,26 @@ const standFunc =async () =>
           if(dealerScore>21)
     {
       showResult("DEALER BUST,PLAYER WINS");
+      playerWinBool=true;
       gameover=true;
     
       
     }
-    if (dealerScore===21)
+    else if (dealerScore>playerScore && dealerScore<21)
+    {      
+            showResult("DEALER WINS!");
+            gameover=true;
+            dealerWinBool=true;
+
+        
+    }
+    else if (dealerScore===21)
     {   
         if(dealerScore==playerScore)
         { 
           showResult("BOTH DEALER AND PLAYER GOT BLACKJACK!");
           gameover=true;
+          tiesBool=true;
         }
           
         else
@@ -321,30 +373,29 @@ const standFunc =async () =>
           showResult("DEALER BLACKJACK WINS!");
         
           gameover=true;
+          dealerWinBool=true;
         }
     }
-    if (dealerScore>playerScore && dealerScore<21)
-    {      
-            showResult("DEALER WINS!");
-            gameover=true;
-        
-    }
-    if (dealerScore===playerScore)
+    
+    else if (dealerScore===playerScore)
     {
       showResult("TIE!");
       gameover=true;
+      tiesBool=true;
     }
-    if (playerScore>dealerScore && dealerScore>16)
+    else if (playerScore>dealerScore && dealerScore>16)
     {
       if (playerScore===21)
       {
        showResult("BLACKJACK PLAYER WINS!")
       gameover=true;
+      playerWinBool=true;
       }
       else {
        
         showResult("PLAYER WINS!")
       gameover=true;
+      playerWinBool=true
       }
     }
      
@@ -369,7 +420,7 @@ const standFunc =async () =>
       
 
 
-
+    }
 }
 
 
@@ -380,11 +431,23 @@ const firstDraw = async () =>
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
+  gameover=false;
 
   
 
+  
+  const resultHead=document.getElementById("resultHeader");
+  resultHead.innerHTML=""
 
-  gameover=false;
+  dWins=document.getElementById('dealerWins');
+  dWins.innerHTML=`Wins: ${dealerWins}`;
+  pWins=document.getElementById('playerWins');
+  pWins.innerHTML=`Wins: ${playerWins}`;
+
+  TiesElement=document.getElementById('ties');
+  TiesElement.innerHTML=`Ties: ${ties}`
+
+  
   const dealerHand=document.getElementById("dealerHand");
   const playerHand=document.getElementById("playerHand");
   const dealerValue=document.getElementById("dealerValue");
@@ -458,6 +521,7 @@ const firstDraw = async () =>
   {
     standFunc();
   }
+
   const hitButton=document.getElementById("hitBtn");
   const standButton=document.getElementById("standBtn");
   setTimeout(() => {
@@ -472,13 +536,8 @@ const firstDraw = async () =>
   dealerScore=getSum(dealerCards);
   playerScore=getSum(playerCards);
 
-
- 
- 
-
-
-
 }
+
 
 
 
