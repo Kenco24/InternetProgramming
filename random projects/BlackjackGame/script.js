@@ -123,7 +123,8 @@ const hitFunc = async () => {
   const playerValue = document.getElementById("playerValue");
   const hitbutton = document.getElementById("hitBtn");
   const standbutton = document.getElementById("standBtn");
-
+  const playerDiv=document.getElementById("playerDiv");
+  
 
   
     hitbutton.style.display="none";
@@ -138,8 +139,8 @@ const hitFunc = async () => {
     playerHand.appendChild(img);
    
     img.src = data.cards[0].image;
-      
-     animateCard(img, 500).then(async () => {    
+     scaleContainer(playerDiv)
+     animateCard(img, 500,).then(async () => {    
       await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 500 milliseconds (adjust as needed)
       playerValue.innerHTML = `Value : ${getSum(playerCards)}`;  // sets HTML Value to the sum of playercards
       playerScore = getSum(playerCards);  //adds it to the playerscore to calc who wins etc.
@@ -211,6 +212,12 @@ const showResult = (text) =>{
   }, 500);
 
 }
+function resetContainerWidth(containerDiv) {
+  if (containerDiv) {
+    containerDiv.style.width = ""; // Reset the width to an empty string, which will use the default width
+    containerDiv.style.transition = ""; // Remove the transition to avoid animation during reset
+  }
+}
 
 //When the gamer is over a restart button is displayed which when clicked calls this fucntion. What this function does is reset everything like it was at the start. Then calls first draw
 const restartFunc = () =>
@@ -230,6 +237,12 @@ const restartFunc = () =>
   i=0;
   document.getElementById("playerHand").innerHTML="";
   document.getElementById("dealerHand").innerHTML="";
+
+  const dealerDiv = document.getElementsByClassName("dealerDiv")[0];
+  const playerDiv = document.getElementsByClassName("playerDiv")[0];
+  resetContainerWidth(dealerDiv);
+  resetContainerWidth(playerDiv);
+  
   dealerCards=[]
   playerCards=[]
   tempimg=[];
@@ -274,13 +287,23 @@ let gameover=false;  //declaring boolean for gameover
 let i=0; //casual int i declaration
 let animateTime=500;
 
-
-
+function scaleContainer(containerDiv) {
+  if (containerDiv) {
+      const scaleFactor = 1.2; // Adjust the scaling factor as needed
+      const originalWidth = containerDiv.offsetWidth;
+      const newWidth = originalWidth * scaleFactor;
+      containerDiv.style.width = `${newWidth}px`;
+      containerDiv.style.transition = "width 0.5s ease-in-out"; // Add transition for a smoother effect
+  }
+}
 // function for animating card 
 async function animateCard(cardElement,time) {
+  
+ 
   cardElement.classList.add("card-animation");
   setTimeout(() => {
-      cardElement.style.transform = "scale(1)";  
+      cardElement.style.transform = "scale(1)";
+    
   }, time); 
 }
 
@@ -290,6 +313,7 @@ const standFunc =async () =>
  
   const hitButton=document.getElementById("hitBtn");
   const standButton=document.getElementById("standBtn");
+  const dealerDiv=document.getElementById("dealerDiv");
   hitButton.style.display="none";
   standButton.style.display="none";
 
@@ -327,6 +351,7 @@ const standFunc =async () =>
       img.src = data.cards[0].image;
       dealerHand.appendChild(img);
       animateCard(img,animateTime);
+      scaleContainer(dealerDiv);
       setTimeout(() => {
         console.log("Dealer Score :" +dealerScore);
       
@@ -454,6 +479,8 @@ const firstDraw = async () =>
   const playerHand=document.getElementById("playerHand");
   const dealerValue=document.getElementById("dealerValue");
   const playerValue=document.getElementById("playerValue");
+  const dealerDiv=document.getElementById("dealerDiv");
+  const playerDiv=document.getElementById("playerDiv");
 
   playerValue.innerHTML=`Value :`;
   dealerValue.innerHTML=`Value :`;
@@ -471,7 +498,9 @@ const firstDraw = async () =>
         playerCards.push(cardCode);
         img.src = card.image;
         playerHand.appendChild(img);
+        scaleContainer(playerDiv);
         await animateCard(img,1500);
+
         
         setTimeout(() => {
           playerValue.innerHTML=`Value : ${getSum(playerCards)}`;
@@ -481,6 +510,7 @@ const firstDraw = async () =>
         playerCards.push(cardCode);
         img.src = card.image;
         playerHand.appendChild(img);
+        scaleContainer(playerDiv);
         await animateCard(img,500);
         
         setTimeout(() => {
@@ -498,6 +528,7 @@ const firstDraw = async () =>
         tempimg.push(card.image);
         img.src = "https://andrewthamcc.github.io/blackjack2.0/assets/facedown.png";
         dealerHand.appendChild(img);
+        scaleContainer(dealerDiv);
         await animateCard(img,2000)
 
         setTimeout(() => {
@@ -510,6 +541,7 @@ const firstDraw = async () =>
         img.src = card.image;
         tempimg.push(card.image);
         dealerHand.appendChild(img);
+        scaleContainer(dealerDiv);
         await animateCard(img,1000)
         setTimeout(() => {
           dealerValue.innerHTML=`Value : ${getSum(dealerCards[0])}`;
