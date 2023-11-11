@@ -148,6 +148,7 @@ const hitFunc = async () => {
 
       
       if (playerScore > 21) {    
+       
         showhiddenCard();   //If player busts the hiddencard for dealer is shown
         showResult("PLAYER BUST, DEALER WINS!");  
         dealerWinBool=true;
@@ -199,14 +200,14 @@ const showResult = (text) =>{
   standButton.style.display = "none";
     setTimeout(() => {
   
- 
+    resultHead.innerText = text;
   
     const playerValue=document.getElementById("playerValue");
     playerValue.innerHTML = `Value : ${getSum(playerCards)}`
     const dealerValue=document.getElementById("dealerValue");
     dealerValue.innerHTML = `Value : ${getSum(dealerCards)}`
  
-    resultHead.innerText = text;
+   
   }, 500);
 
 }
@@ -268,7 +269,7 @@ const showhiddenCard= async ()=>
 
 } 
 
-let tempimg = [];  //declaring empty array for tempimg
+let tempimg = [] ;  //declaring empty array for tempimg
 let gameover=false;  //declaring boolean for gameover
 let i=0; //casual int i declaration
 let animateTime=500;
@@ -330,12 +331,13 @@ const standFunc =async () =>
         console.log("Dealer Score :" +dealerScore);
       
       dealerValue = document.getElementById("dealerValue");
+      standFunc();
       }, 1500);
       
 
-      console.log("Players score in standFUnc()" + playerScore )
+   
       
-      standFunc();
+     
 
  
       };
