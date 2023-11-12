@@ -139,7 +139,7 @@ const hitFunc = async () => {
     playerHand.appendChild(img);
    
     img.src = data.cards[0].image;
-     scaleContainer(playerDiv)
+     
      animateCard(img, 500,).then(async () => {    
       await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 500 milliseconds (adjust as needed)
       playerValue.innerHTML = `Value : ${getSum(playerCards)}`;  // sets HTML Value to the sum of playercards
@@ -173,6 +173,7 @@ const hitFunc = async () => {
     }
     
     });
+    scaleContainer(playerDiv);
     
 
     if(!gameover)
@@ -350,7 +351,7 @@ const standFunc =async () =>
 
       img.src = data.cards[0].image;
       dealerHand.appendChild(img);
-      animateCard(img,animateTime);
+      await animateCard(img,animateTime);
       scaleContainer(dealerDiv);
       setTimeout(() => {
         console.log("Dealer Score :" +dealerScore);
@@ -460,6 +461,8 @@ const firstDraw = async () =>
   }
   gameover=false;
 
+
+
   
 
   
@@ -498,8 +501,9 @@ const firstDraw = async () =>
         playerCards.push(cardCode);
         img.src = card.image;
         playerHand.appendChild(img);
-        scaleContainer(playerDiv);
+        
         await animateCard(img,1500);
+        scaleContainer(playerDiv);
 
         
         setTimeout(() => {
@@ -510,8 +514,9 @@ const firstDraw = async () =>
         playerCards.push(cardCode);
         img.src = card.image;
         playerHand.appendChild(img);
-        scaleContainer(playerDiv);
+
         await animateCard(img,500);
+        scaleContainer(playerDiv);
         
         setTimeout(() => {
           playerValue.innerHTML=`Value : ${getSum(playerCards[0])}`;
@@ -528,8 +533,9 @@ const firstDraw = async () =>
         tempimg.push(card.image);
         img.src = "https://andrewthamcc.github.io/blackjack2.0/assets/facedown.png";
         dealerHand.appendChild(img);
+        
+        await animateCard(img,2000);
         scaleContainer(dealerDiv);
-        await animateCard(img,2000)
 
         setTimeout(() => {
           dealerValue.innerHTML=`Value : ${getSum(dealerCards[0])}`;
@@ -541,8 +547,9 @@ const firstDraw = async () =>
         img.src = card.image;
         tempimg.push(card.image);
         dealerHand.appendChild(img);
+        
+        await animateCard(img,1000);
         scaleContainer(dealerDiv);
-        await animateCard(img,1000)
         setTimeout(() => {
           dealerValue.innerHTML=`Value : ${getSum(dealerCards[0])}`;
         }, 1000);
@@ -558,11 +565,13 @@ const firstDraw = async () =>
 
   const hitButton=document.getElementById("hitBtn");
   const standButton=document.getElementById("standBtn");
+  hitButton.style.display="none";
+  standButton.style.display="none";
   setTimeout(() => {
       hitButton.style.display="block";
       standButton.style.display="block";
       
-  }, 3000);
+  }, 3500);
   
 
 
