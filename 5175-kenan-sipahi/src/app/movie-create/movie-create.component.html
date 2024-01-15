@@ -1,0 +1,74 @@
+<!-- movie-create.component.html -->
+<div>
+    <h2>Create Movie</h2>
+    <form [formGroup]="movieForm" (ngSubmit)="createMovie()">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" formControlName="title">
+        <div *ngIf="movieForm.get('title')?.hasError('required')">
+          Title is required.
+        </div>
+        <div *ngIf="movieForm.get('title')?.hasError('maxlength')">
+          Title cannot exceed 100 characters.
+        </div>
+      </div>
+  
+      <div>
+        <label for="year">Year:</label>
+        <input type="text" id="year" formControlName="year">
+        <div *ngIf="movieForm.get('year')?.hasError('required') || movieForm.get('year')?.hasError('pattern')">
+          Please enter a valid year (4 digits).
+        </div>
+      </div>
+  
+      <div>
+        <label for="director">Director:</label>
+        <input type="text" id="director" formControlName="director">
+       
+      </div>
+  
+      <div>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" formControlName="genre">
+        
+      </div>
+  
+      <div>
+        <label for="plot">Plot:</label>
+        <textarea id="plot" formControlName="plot"></textarea>
+      
+      </div>
+  
+      <div formGroupName="cast">
+        <label for="actor">Actor:</label>
+        <input type="text" id="actor" formControlName="actor">
+
+        <label for="character">Character:</label>
+        <input type="text" id="character" formControlName="character">
+        
+      </div>
+  
+      <div formGroupName="oscars">
+        <label for="category">Oscar Category:</label>
+        <input type="text" id="category" formControlName="category">
+       
+  
+        <label for="oscarYear">Oscar Year:</label>
+        <input type="text" id="oscarYear" formControlName="year">
+        
+      </div>
+  
+      <div>
+        <label for="rating">Rating:</label>
+        <input type="text" id="rating" formControlName="rating">
+        <div *ngIf="movieForm.get('rating')?.hasError('required') || movieForm.get('rating')?.hasError('pattern')">
+          Please enter a valid rating.
+        </div>
+      </div>
+  
+      <div>
+        <button type="submit" (click)="goBack()">Create Movie</button>
+      </div>
+    </form>
+  </div>
+  

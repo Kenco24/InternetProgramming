@@ -1,0 +1,10 @@
+
+<h2>{{ actorDetails.name }}</h2>
+<p>Birthdate: {{ actorDetails.birthdate }}</p>
+<p>Height: {{ actorDetails.height }} cm</p>
+<p>Nationality: {{ actorDetails.nationality }}</p>
+
+<h3>Notable Works:</h3>
+<ul>
+  <li *ngFor="let work of actorDetails.notable_works">{{ work }}</li>
+</ul>
